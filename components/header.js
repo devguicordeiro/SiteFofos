@@ -1,8 +1,13 @@
 import Link from "next/link";
+import { styled } from "styled-components";
+
+const StyledHeader = styled.header `
+    background-color: #333;
+`;
 
 export default function Header() {
     return (
-        <header>
+        <StyledHeader>
             <Link href={"/"}>
                 Fofos
             </Link>
@@ -13,6 +18,6 @@ export default function Header() {
                 <Link href={"/account"}>Conta</Link>
                 <Link href={"/cart"}>Carrinho (0)</Link>
             </nav>
-        </header>
+        </StyledHeader>
     )
 }
