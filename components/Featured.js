@@ -34,7 +34,7 @@ const ButtonsWrapper = styled.div`
     margin-top: 25px;
 `;
 
-export default function Featured() {
+export default function Featured({product}) {
     return(
         <Bg>
             <Center>
