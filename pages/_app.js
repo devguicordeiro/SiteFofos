@@ -12,8 +12,8 @@ const GlobalStyles = createGlobalStyle`
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <GlobalStyles></GlobalStyles>
+      <GlobalStyles/>
       <Component {...pageProps} />
     </>
-  )
+  );
 }
