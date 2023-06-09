@@ -41,8 +41,8 @@ export default function Featured({product}) {
                 <ColumnsWrapper>
                     <Column>
                     <div>
-                        <Title>Pro</Title>
-                        <Desc>lajsdoiasjdio jsaoi djasoijd asoijd saoi aksdopka asokdpoak oaksd poakdp okapdo kapodks  asodkopakdpoaksdpoakks asokd opakd opakpok asok</Desc>
+                        <Title>{product.title}</Title>
+                        <Desc>{product.description}</Desc>
                         <ButtonsWrapper>
                             <Button outline white>Saiba mais</Button>
                             <Button primary>
