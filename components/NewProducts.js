@@ -4,7 +4,9 @@ import ProductBox from "./ProductBox";
 
 const ProductsGrid = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    padding-top: 20px;
 `;
 
 export default function NewProducts({products}) {
