@@ -12,20 +12,27 @@ svg{
     height: 16px;
     margin-right: 5px;
 }
-${props => props.primary && css`
+${props => props.primary && !props.outline && css`
     background-color: #581c87;
     color: #fff;
     border: 1px solid #581c87;
 `}
+${props => props.primary && props.outline && css`
+    background-color: transparent;
+    color: #581c87;
+    border: 1px solid #581c87;
+`}
 ${props => props.white && !props.outline && css`
     background-color: #fff;
-    color: #000;
+    color: #581c87;
+    border: 1px solid #581c87;
 `}
 ${props => props.white && props.outline && css`
     background-color: transparent;
     color: #fff;
     border: 1px solid #fff;
 `}
+
 ${props => props.size === "l" && css`
     font-size: 1rem;
     padding: 10px 20px;

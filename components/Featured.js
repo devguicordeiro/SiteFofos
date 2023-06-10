@@ -47,7 +47,7 @@ export default function Featured({product}) {
                         <Desc>{product.description}</Desc>
                         <ButtonsWrapper>
                             <ButtonLink href={"/products/"+product._id} outline={1} white={1}>Saiba mais</ButtonLink>
-                            <Button primary={1}>
+                            <Button white={1}>
                                 <CartIcon/>
                                 Adicionar ao carrinho</Button>
                         </ButtonsWrapper>

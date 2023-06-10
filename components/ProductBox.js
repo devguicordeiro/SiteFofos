@@ -1,12 +1,13 @@
 import { styled } from "styled-components"
 import Button from "./Button";
 import CartIcon from "./icons/CartIcon";
+import Link from "next/link";
 
 const ProductWrapper = styled.div`
 
 `;
 
-const FuchsiaBox = styled.div`
+const FuchsiaBox = styled(Link)`
     background-color: fuchsia;
     padding: 20px;
     height: 120px;
@@ -21,10 +22,12 @@ const FuchsiaBox = styled.div`
     }
 `;
 
-const Title = styled.h2`
+const Title = styled(Link)`
     font-weight: normal;
     font-size: 1rem;
     margin: 0;
+    color: inherit;
+    text-decoration: none;
 `;
 
 const ProductInfoBox = styled.div `
@@ -43,18 +46,19 @@ const Price = styled.div`
 `;
 
 export default function ProductBox({_id, title, description, price, images}) {
+    const url = "/product/"+_id;
     return(
         <ProductWrapper>
-            <FuchsiaBox>
+            <FuchsiaBox href={url}>
                 <div>
                 <img src={images[0]}></img>
                 </div>
             </FuchsiaBox>
             <ProductInfoBox>
-                <Title>{title}</Title>
+                <Title href={url}>{title}</Title>
                 <PriceRow>
                     <Price>R$ {price}</Price>
-                    <Button primary={1}><CartIcon/></Button>
+                    <Button white={1}><CartIcon/></Button>
                 </PriceRow>
             </ProductInfoBox>
         </ProductWrapper>
