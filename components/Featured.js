@@ -3,6 +3,8 @@ import Center from "./center";
 import Button from "./Button";
 import ButtonLink from "./ButtonLink";
 import CartIcon from "./icons/CartIcon";
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
 
 const Bg = styled.div`
  background-color: #333;
@@ -37,6 +39,11 @@ const ButtonsWrapper = styled.div`
 `;
 
 export default function Featured({product}) {
+    const{setCartProducts} = useContext(CartContext)
+    function addFeaturedToCart(){
+
+        setCartProducts(prev => [...prev,product._id]);
+    }
     return(
         <Bg>
             <Center>
@@ -47,7 +54,7 @@ export default function Featured({product}) {
                         <Desc>{product.description}</Desc>
                         <ButtonsWrapper>
                             <ButtonLink href={"/products/"+product._id} outline={1} white={1}>Saiba mais</ButtonLink>
-                            <Button white={1}>
+                            <Button white={1} onClick={addFeaturedToCart}>
                                 <CartIcon/>
                                 Adicionar ao carrinho</Button>
                         </ButtonsWrapper>
