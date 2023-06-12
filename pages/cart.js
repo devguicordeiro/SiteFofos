@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import { CartContext } from "@/components/CartContext";
+import Table from "@/components/Table";
 import Center from "@/components/center";
 import Header from "@/components/header";
 import axios from "axios";
@@ -19,6 +20,28 @@ const Box = styled.div`
     padding: 30px;
 `;
 
+const ProductInfoCell = styled.div `
+    padding: 10px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+`;
+
+const ProductImageBox = styled.div`
+    img{
+        max-width: 80px;
+        max-height: 80px;
+
+    };
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+`;
+
 export default function CartPage() {
     const {cartProducts} = useContext(CartContext);
     const [products, setProducts] = useState ([]);
@@ -35,12 +58,12 @@ export default function CartPage() {
             <Center>
             <ColumnsWrapper>
                 <Box>
-                <h2>Cart</h2>
+                <h2>Carrinho</h2>
                     {!cartProducts?.length && (
                         <div>Seu carrinho está vazio</div>
                     )}
                     {products?.length > 0 && (
-                    <table>
+                    <Table>
                         <thead>
                             <tr>
                                 <th>Produto</th>
@@ -51,13 +74,18 @@ export default function CartPage() {
                         <tbody>
                             {products.map(product => (
                                     <tr>
-                                        <td>{product.title}</td>
-                                         <td>{cartProducts.filter(id => id === product._id).length}</td>
-                                        <td></td>
+                                        <ProductInfoCell>
+                                            <ProductImageBox>
+                                                <img src={product.images[0]} alt=""/>
+                                            </ProductImageBox>
+                                                {product.title}
+                                            </ProductInfoCell>
+                                        <td>{cartProducts.filter(id => id === product._id).length}</td>
+                                        <td>Price</td>
                                     </tr>
                             ))}
                         </tbody>
-                    </table>
+                    </Table>
                     )}
                 </Box>
                 {!!cartProducts?.length && (
