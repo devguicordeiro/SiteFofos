@@ -2,6 +2,7 @@ import Button from "@/components/Button";
 import { CartContext } from "@/components/CartContext";
 import Center from "@/components/center";
 import Header from "@/components/header";
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { styled } from "styled-components";
 
@@ -23,7 +24,9 @@ export default function CartPage() {
     const [products, setProducts] = useState ([]);
     useEffect (() => {
         if (cartProducts.length > 0) {
-
+            axios.post("/api/cart", {ids:cartProducts}).then(response => {
+                setProducts(response.data);
+            })
         }
     }, [cartProducts]); 
     return (
@@ -35,11 +38,11 @@ export default function CartPage() {
                     {!cartProducts?.length && (
                         <div>Seu carrinho está vazio</div>
                     )}
-                    {cartProducts?.length > 0 && (
+                    {products?.length > 0 && (
                         <>
                             <h2>Cart</h2>
-                            {cartProducts.map(productId => (
-                                <div></div>
+                            {products.map(product => (
+                                <div>{product.title}</div>
                             ))}
                         </>
                     )}
