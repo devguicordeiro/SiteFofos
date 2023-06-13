@@ -131,16 +131,19 @@ export default function CartPage() {
           {!!cartProducts?.length && (
             <Box>
               <h2>Informação do pedido</h2>
+              <form method="post" action="/api/checkout">
               <Input 
                 type="text" 
                 placeholder="Nome"
                 value={name}
+                name="name"
                 onChange={ev => setName(ev.target.value)}>        
               </Input>
               <Input 
                 type="text" 
                 placeholder="Email"
                 value={email}
+                name="email"
                 onChange={ev => setEmail(ev.target.value)}>
               </Input>
               <CityHolder>
@@ -148,12 +151,14 @@ export default function CartPage() {
                 type="text" 
                 placeholder="Cidade"
                 value={city}
+                name="city"
                 onChange={ev => setCity(ev.target.value)}>
               </Input>
               <Input 
                 type="text" 
                 placeholder="CEP"
                 value={cep}
+                name="cep"
                 onChange={ev => setCep(ev.target.value)}>
               </Input>
               </CityHolder>
@@ -161,6 +166,7 @@ export default function CartPage() {
                 type="text" 
                 placeholder="Endereço"
                 value={address}
+                name="address"
                 onChange={ev => setAddress(ev.target.value)}>
               </Input>
               <CityHolder>
@@ -168,16 +174,19 @@ export default function CartPage() {
                 type="text" 
                 placeholder="Casa, apt, ..."
                 value={house}
+                name="house"
                 onChange={ev => setHouse(ev.target.value)}>
               </Input>
               <Input 
                 type="text" 
                 placeholder="Complemento"
                 value={complement}
+                name="complement"
                 onChange={ev => setComplement(ev.target.value)}>
               </Input>
               </CityHolder>
-              <Button block={1} black={1}>Continuar para pagamento</Button>
+              <Button type="submit" block={1} black={1}>Continuar para pagamento</Button>
+              </form>
             </Box>
           )}
         </ColumnsWrapper>
