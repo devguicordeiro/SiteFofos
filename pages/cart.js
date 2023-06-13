@@ -5,7 +5,7 @@ import Table from "@/components/Table";
 import Center from "@/components/center";
 import Header from "@/components/header";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, } from "react";
 import { styled } from "styled-components";
 
 const ColumnsWrapper = styled.div`
@@ -53,12 +53,21 @@ const CityHolder = styled.div`
 export default function CartPage() {
   const { cartProducts, addProduct, removeProduct } = useContext(CartContext);
   const [products, setProducts] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [cep, setCep] = useState("");
+  const [address, setAddress] = useState("");
+  const [house, setHouse] = useState("");
+  const [complement, setComplement] = useState("");
 
   useEffect(() => {
     if (cartProducts.length > 0) {
       axios.post("/api/cart", { ids: cartProducts }).then(response => {
         setProducts(response.data);
       });
+    } else {
+      setProducts([]);
     }
   }, [cartProducts]);
 
@@ -122,16 +131,51 @@ export default function CartPage() {
           {!!cartProducts?.length && (
             <Box>
               <h2>Informação do pedido</h2>
-              <Input type="text" placeholder="Nome"></Input>
-              <Input type="text" placeholder="Email"></Input>
+              <Input 
+                type="text" 
+                placeholder="Nome"
+                value={name}
+                onChange={ev => setName(ev.target.value)}>        
+              </Input>
+              <Input 
+                type="text" 
+                placeholder="Email"
+                value={email}
+                onChange={ev => setEmail(ev.target.value)}>
+              </Input>
               <CityHolder>
-                <Input type="text" placeholder="Cidade"></Input>
-                <Input type="text" placeholder="CEP"></Input>
+              <Input 
+                type="text" 
+                placeholder="Cidade"
+                value={city}
+                onChange={ev => setCity(ev.target.value)}>
+              </Input>
+              <Input 
+                type="text" 
+                placeholder="CEP"
+                value={cep}
+                onChange={ev => setCep(ev.target.value)}>
+              </Input>
               </CityHolder>
-              <Input type="text" placeholder="Endereço"></Input>
+              <Input 
+                type="text" 
+                placeholder="Endereço"
+                value={address}
+                onChange={ev => setAddress(ev.target.value)}>
+              </Input>
               <CityHolder>
-                <Input type="text" placeholder="Casa, Apt ..."></Input>
-                <Input type="text" placeholder="Complemento"></Input>
+              <Input 
+                type="text" 
+                placeholder="Casa, apt, ..."
+                value={house}
+                onChange={ev => setHouse(ev.target.value)}>
+              </Input>
+              <Input 
+                type="text" 
+                placeholder="Complemento"
+                value={complement}
+                onChange={ev => setComplement(ev.target.value)}>
+              </Input>
               </CityHolder>
               <Button block={1} black={1}>Continuar para pagamento</Button>
             </Box>
