@@ -29,5 +29,7 @@ export default async function handler(req, res) {
             });
         }
     }
-    res.json({line_items});
+    Order.create({
+        line_items, name, email, city, address, cep, house, complement, paid:false,
+    })
 }
