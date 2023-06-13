@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import { CartContext } from "@/components/CartContext";
+import Input from "@/components/Input";
 import Table from "@/components/Table";
 import Center from "@/components/center";
 import Header from "@/components/header";
@@ -42,6 +43,11 @@ const ProductImageBox = styled.div`
 
 const QuantityLabel = styled.span`
   padding: 0 5px;
+`;
+
+const CityHolder = styled.div`
+  display: flex;
+  gap: 5px;
 `;
 
 export default function CartPage() {
@@ -116,8 +122,17 @@ export default function CartPage() {
           {!!cartProducts?.length && (
             <Box>
               <h2>Informação do pedido</h2>
-              <input type="text"></input>
-              <input type="text"></input>
+              <Input type="text" placeholder="Nome"></Input>
+              <Input type="text" placeholder="Email"></Input>
+              <CityHolder>
+                <Input type="text" placeholder="Cidade"></Input>
+                <Input type="text" placeholder="CEP"></Input>
+              </CityHolder>
+              <Input type="text" placeholder="Endereço"></Input>
+              <CityHolder>
+                <Input type="text" placeholder="Casa, Apt ..."></Input>
+                <Input type="text" placeholder="Complemento"></Input>
+              </CityHolder>
               <Button block={1} black={1}>Continuar para pagamento</Button>
             </Box>
           )}
