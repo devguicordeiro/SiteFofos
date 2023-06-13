@@ -64,6 +64,12 @@ export default function CartPage() {
     removeProduct(id);
   }
 
+  let total = 0;
+  for (const productId of cartProducts) {
+    const price = products.find(p => p._id === productId)?.price || 0;
+    total += price;
+  }
+
   return (
     <>
       <Header></Header>
@@ -98,6 +104,11 @@ export default function CartPage() {
                       <td>R${cartProducts.filter(id => id === product._id).length * product.price}</td>
                     </tr>
                   ))}
+                    <tr>
+                      <td>TOTAL:</td>
+                      <td></td>
+                      <td>R${total}</td>
+                    </tr>
                 </tbody>
               </Table>
             )}
