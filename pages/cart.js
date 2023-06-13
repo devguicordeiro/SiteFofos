@@ -185,6 +185,9 @@ export default function CartPage() {
                 onChange={ev => setComplement(ev.target.value)}>
               </Input>
               </CityHolder>
+              <input type="hidden" 
+                     value={cartProducts.join(",")}
+                     name="products" />
               <Button type="submit" block={1} black={1}>Continuar para pagamento</Button>
               </form>
             </Box>
