@@ -29,7 +29,9 @@ export default async function handler(req, res) {
             });
         }
     }
-    Order.create({
+    const orderDoc = await Order.create({
         line_items, name, email, city, address, cep, house, complement, paid:false,
-    })
+    });
+
+    
 }
