@@ -95,6 +95,22 @@ export default function CartPage() {
     total += price;
   }
 
+  if (window.location.href.includes("success")) {
+    return (
+      <>
+        <Header></Header>
+        <Center>
+          <ColumnsWrapper>
+          <Box>
+            <h1>Obrigado por comprar com a Fofos!</h1>
+            <p>Nós vamos lhe enviar por email os detalhes de sua ordem.</p>
+          </Box>
+          </ColumnsWrapper>
+        </Center>
+      </>
+    )
+  }
+
   return (
     <>
       <Header></Header>
