@@ -10,6 +10,8 @@ const OrderSchema = new Schema({
     complement: String,
     paid:{type: Boolean,}
 
+}, {
+    timestamps: true,
 });
 
 export const Order = models?.Order || model("Order", OrderSchema);
