@@ -5,7 +5,7 @@ export const CartContext = createContext({});
 export function CartContextProvider({ children }) {
   const ls = typeof window !== "undefined" ? window.localStorage : null;
   const [cartProducts, setCartProducts] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false); // New state variable
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (!isLoaded && ls && ls.getItem("cart")) {
