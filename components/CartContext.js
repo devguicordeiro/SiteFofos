@@ -55,3 +55,4 @@ export function CartContextProvider({ children }) {
     </CartContext.Provider>
   );
 }
+
