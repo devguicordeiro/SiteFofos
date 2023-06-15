@@ -5,12 +5,12 @@ import Table from "@/components/Table";
 import Center from "@/components/center";
 import Header from "@/components/header";
 import axios from "axios";
-import { useContext, useEffect, useState, } from "react";
+import { useContext, useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 const ColumnsWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1.3fr .7fr;
+  grid-template-columns: 1.3fr 0.7fr;
   gap: 40px;
   margin-top: 40px;
 `;
@@ -21,7 +21,7 @@ const Box = styled.div`
   padding: 30px;
 `;
 
-const ProductInfoCell = styled.div `
+const ProductInfoCell = styled.div`
   padding: 10px 0;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 `;
@@ -92,7 +92,13 @@ export default function CartPage() {
 
   async function goToPayment() {
     const response = await axios.post("/api/checkout", {
-      name, email, city, cep, address, house, complement,
+      name,
+      email,
+      city,
+      cep,
+      address,
+      house,
+      complement,
       cartProducts,
     });
     if (response.data.url) {
@@ -112,14 +118,14 @@ export default function CartPage() {
         <Header></Header>
         <Center>
           <ColumnsWrapper>
-          <Box>
-            <h1>Obrigado por comprar com a Fofos!</h1>
-            <p>Nós vamos lhe enviar por email os detalhes de sua ordem.</p>
-          </Box>
+            <Box>
+              <h1>Obrigado por comprar com a Fofos!</h1>
+              <p>Nós vamos lhe enviar por email os detalhes de sua ordem.</p>
+            </Box>
           </ColumnsWrapper>
         </Center>
       </>
-    )
+    );
   }
 
   return (
@@ -141,10 +147,10 @@ export default function CartPage() {
                 </thead>
                 <tbody>
                   {products.map(product => (
-                    <tr>
+                    <tr key={product._id}>
                       <ProductInfoCell>
                         <ProductImageBox>
-                          <img src={product.images[0]} alt="" />
+                          <img src={product.images[0]} alt={product.title} />
                         </ProductImageBox>
                         {product.title}
                       </ProductInfoCell>
@@ -156,11 +162,11 @@ export default function CartPage() {
                       <td>R${cartProducts.filter(id => id === product._id).length * product.price}</td>
                     </tr>
                   ))}
-                    <tr>
-                      <td>TOTAL:</td>
-                      <td></td>
-                      <td>R${total}</td>
-                    </tr>
+                  <tr>
+                    <td>TOTAL:</td>
+                    <td></td>
+                    <td>R${total}</td>
+                  </tr>
                 </tbody>
               </Table>
             )}
@@ -168,60 +174,62 @@ export default function CartPage() {
           {!!cartProducts?.length && (
             <Box>
               <h2>Informação do pedido</h2>
-              <Input 
-                type="text" 
+              <Input
+                type="text"
                 placeholder="Nome"
                 value={name}
                 name="name"
-                onChange={ev => setName(ev.target.value)}>        
-              </Input>
-              <Input 
-                type="text" 
+                onChange={ev => setName(ev.target.value)}
+              ></Input>
+              <Input
+                type="text"
                 placeholder="Email"
                 value={email}
                 name="email"
-                onChange={ev => setEmail(ev.target.value)}>
-              </Input>
+                onChange={ev => setEmail(ev.target.value)}
+              ></Input>
               <CityHolder>
-              <Input 
-                type="text" 
-                placeholder="Cidade"
-                value={city}
-                name="city"
-                onChange={ev => setCity(ev.target.value)}>
-              </Input>
-              <Input 
-                type="text" 
-                placeholder="CEP"
-                value={cep}
-                name="cep"
-                onChange={ev => setCep(ev.target.value)}>
-              </Input>
+                <Input
+                  type="text"
+                  placeholder="Cidade"
+                  value={city}
+                  name="city"
+                  onChange={ev => setCity(ev.target.value)}
+                ></Input>
+                <Input
+                  type="text"
+                  placeholder="CEP"
+                  value={cep}
+                  name="cep"
+                  onChange={ev => setCep(ev.target.value)}
+                ></Input>
               </CityHolder>
-              <Input 
-                type="text" 
+              <Input
+                type="text"
                 placeholder="Endereço"
                 value={address}
                 name="address"
-                onChange={ev => setAddress(ev.target.value)}>
-              </Input>
+                onChange={ev => setAddress(ev.target.value)}
+              ></Input>
               <CityHolder>
-              <Input 
-                type="text" 
-                placeholder="Casa, apt, ..."
-                value={house}
-                name="house"
-                onChange={ev => setHouse(ev.target.value)}>
-              </Input>
-              <Input 
-                type="text" 
-                placeholder="Complemento"
-                value={complement}
-                name="complement"
-                onChange={ev => setComplement(ev.target.value)}>
-              </Input>
+                <Input
+                  type="text"
+                  placeholder="Casa, apt, ..."
+                  value={house}
+                  name="house"
+                  onChange={ev => setHouse(ev.target.value)}
+                ></Input>
+                <Input
+                  type="text"
+                  placeholder="Complemento"
+                  value={complement}
+                  name="complement"
+                  onChange={ev => setComplement(ev.target.value)}
+                ></Input>
               </CityHolder>
-              <Button onClick={goToPayment} block={1} black={1}>Continuar para pagamento</Button>
+              <Button onClick={goToPayment} block={1} black={1}>
+                Continuar para pagamento
+              </Button>
             </Box>
           )}
         </ColumnsWrapper>
