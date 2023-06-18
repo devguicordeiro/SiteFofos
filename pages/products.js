@@ -1,3 +1,4 @@
+import ProductsGrid from "@/components/ProductsGrid";
 import Center from "@/components/center";
 import Header from "@/components/header";
 import { mongooseConnect } from "@/lib/mongoose";
@@ -8,12 +9,13 @@ const Title = styled.h1`
     font-size: 1.5em;
 `;
 
-export default function ProductsPage() {
+export default function ProductsPage({products}) {
     return(
         <>
             <Header></Header>
             <Center>
                 <Title>Todos os Produtos</Title>
+                <ProductsGrid products={products}></ProductsGrid>
             </Center>
         </>
     )

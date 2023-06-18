@@ -52,7 +52,7 @@ export default function ProductBox({ _id, title, description, price, images }) {
     <ProductWrapper>
       <FuchsiaBox href={url}>
         <div>
-          <img src={images[0]} alt={title} />
+          <img src={images?.[0]} alt={title} />
         </div>
       </FuchsiaBox>
       <ProductInfoBox>
