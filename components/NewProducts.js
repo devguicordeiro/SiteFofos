@@ -13,11 +13,9 @@ export default function NewProducts({ products }) {
     <div>
       <Center>
         <Title>Novidades</Title>
-        <ProductsGrid>
           <ProductsGrid products={products}>
 
           </ProductsGrid>
-        </ProductsGrid>
       </Center>
     </div>
   );
