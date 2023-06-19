@@ -1,3 +1,4 @@
+import WhiteBox from "@/components/WhiteBox";
 import Center from "@/components/center";
 import Header from "@/components/header";
 import { mongooseConnect } from "@/lib/mongoose";
@@ -8,12 +9,27 @@ const Title = styled.h1`
     font-size: 1.5em;
 `;
 
+const ColWrapper = styled.div`
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 40px;
+    margin-top:40px;
+`;
+
 export default function ProductPage({product}) {
     return (
         <>
             <Header>            </Header>
                 <Center>
-                    <Title>{product.title}</Title>
+                    <ColWrapper>
+                        <WhiteBox>
+                            <img style={{maxWidth:"100%"}} src={product.images?.[0]} />
+                        </WhiteBox>
+                        <div>
+                           <Title>{product.title}</Title>
+                           <p>{product.description}</p>
+                        </div>
+                    </ColWrapper>
                 </Center>
         </>
     )
