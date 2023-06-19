@@ -11,11 +11,10 @@ const Title = styled.h1`
 export default function ProductPage({product}) {
     return (
         <>
-            <Header>
+            <Header>            </Header>
                 <Center>
-                    <Title></Title>
+                    <Title>{product.title}</Title>
                 </Center>
-            </Header>
         </>
     )
 }
