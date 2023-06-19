@@ -1,3 +1,4 @@
+import ProductImages from "@/components/ProductImages";
 import WhiteBox from "@/components/WhiteBox";
 import Center from "@/components/center";
 import Header from "@/components/header";
@@ -23,7 +24,7 @@ export default function ProductPage({product}) {
                 <Center>
                     <ColWrapper>
                         <WhiteBox>
-                            <img style={{maxWidth:"100%"}} src={product.images?.[0]} />
+                            <ProductImages images={product.images}></ProductImages>
                         </WhiteBox>
                         <div>
                            <Title>{product.title}</Title>
