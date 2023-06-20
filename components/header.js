@@ -28,7 +28,7 @@ const StyledNav = styled.nav `
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 50px 20px 20px;
+    padding: 70px 20px 20px;
     background-color: #333;
     @media screen and (min-width: 768px) {
         display: flex;
@@ -41,6 +41,11 @@ const NavLink = styled(Link) `
     color: #aaa;
     text-decoration: none;
     display: block;
+    padding: 10px 0;
+    @media screen and (min-width: 768px) {
+        padding: 0;
+    }
+
 `;
 
 const NavButton = styled.button`
@@ -52,7 +57,7 @@ const NavButton = styled.button`
     cursor: pointer;
     padding: 0;
     position: relative;
-    z-index: 3;
+    z-index: 3; 
     @media screen and (min-width: 768px) {
         display: none;
     }
