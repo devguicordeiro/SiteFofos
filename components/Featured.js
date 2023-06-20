@@ -14,7 +14,7 @@ const Bg = styled.div`
 const Title = styled.h1`
     margin: 0;
     font-weight: normal;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     @media screen and (min-width: 768px) {
         font-size: 3rem;
     }
