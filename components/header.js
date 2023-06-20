@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { styled } from "styled-components";
 import Center from "./center";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "./CartContext";
 import MenuIcon from "./icons/MenuIcon";
 
@@ -11,6 +11,8 @@ const StyledHeader = styled.header `
 const Logo = styled(Link)`
     color: #fff;
     text-decoration: none;
+    position: relative;
+    z-index: 3;
 `;
 const Wrapper = styled.div`
 display: flex;
@@ -19,14 +21,14 @@ padding: 10px 0;
 `;
 
 const StyledNav = styled.nav `
+    ${props => props.mobileNavActive ? `display: block;` : `display: none;`}
     gap: 15px;
-    display: block;
     position: fixed;
-    top: 50px;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 20px;
+    padding: 50px 20px 20px;
     background-color: #333;
     @media screen and (min-width: 768px) {
         display: flex;
@@ -49,6 +51,8 @@ const NavButton = styled.button`
     color: white;
     cursor: pointer;
     padding: 0;
+    position: relative;
+    z-index: 3;
     @media screen and (min-width: 768px) {
         display: none;
     }
@@ -57,6 +61,7 @@ const NavButton = styled.button`
 
 export default function Header() {
     const {cartProducts} = useContext(CartContext);
+    const [mobileNavActive, setMobileNavActive] = useState(false);
     return (
         <StyledHeader>
             <Center>
@@ -64,14 +69,14 @@ export default function Header() {
                     <Logo href={"/"}>
                         Fofos
                     </Logo>
-                    <StyledNav>
+                    <StyledNav mobileNavActive={mobileNavActive}>
                         <NavLink href={"/"}>Início</NavLink>
                         <NavLink href={"/products"}>Produtos</NavLink>
                         <NavLink href={"/categories"}>Categorias</NavLink>
                         <NavLink href={"/account"}>Conta</NavLink>
                         <NavLink href={"/cart"}>Carrinho ({cartProducts.length})</NavLink>
                     </StyledNav>
-                    <NavButton>
+                    <NavButton onClick={() => setMobileNavActive(prev => !prev)}>
                         <MenuIcon></MenuIcon>
                     </NavButton>
                 </Wrapper>
