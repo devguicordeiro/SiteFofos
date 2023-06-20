@@ -19,14 +19,26 @@ padding: 10px 0;
 `;
 
 const StyledNav = styled.nav `
-    display: flex;
     gap: 15px;
+    display: block;
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background-color: #333;
+    @media screen and (min-width: 768px) {
+        display: flex;
+        position: static;
+        padding: 0;
+    }
 `;
 
 const NavLink = styled(Link) `
     color: #aaa;
     text-decoration: none;
-
+    display: block;
 `;
 
 const NavButton = styled.button`
@@ -37,6 +49,9 @@ const NavButton = styled.button`
     color: white;
     cursor: pointer;
     padding: 0;
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
 `;
 
 
