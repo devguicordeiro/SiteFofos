@@ -10,7 +10,10 @@ import { styled } from "styled-components";
 
 const ColumnsWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
+  grid-template-columns: 1fr;
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1.3fr 0.7fr;
+}
   gap: 40px;
   margin-top: 40px;
 `;
@@ -33,16 +36,24 @@ const ProductImageBox = styled.div`
   }
   width: 100px;
   height: 100px;
-  padding: 10px;
+  padding: 2px;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (min-width: 768px) {
+    padding: 10px;
+  };
 `;
 
 const QuantityLabel = styled.span`
-  padding: 0 5px;
+  padding: 0 14px;
+  display: block;
+  @media screen and (min-width: 768px) { 
+    display: inline-block;
+    padding: 0 10px;
+  };
 `;
 
 const CityHolder = styled.div`
