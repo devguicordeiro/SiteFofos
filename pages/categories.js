@@ -17,6 +17,11 @@ export default function CategoriesPage({ mainCategories, categoriesProducts }) {
                 {mainCategories.map(cat => (
                     <div key={cat._id}>
                         <h2>{cat.name}</h2>
+                        <div>
+                            {categoriesProducts[cat._id].map(p => (
+                                <div>{p.title}</div>
+                            ))}
+                        </div>
                     </div>
                 ))}
             </Center>
