@@ -40,9 +40,13 @@ const ShowAllSquare = styled(Link) `
 
 const CatName = styled(Link) `
     text-decoration: none;
-    h2:hover {
+    h1:hover {
         color: fuchsia;
     }
+`;
+
+const Title = styled.h1`
+    font-size: 1.5em;
 `;
 
 export default function CategoriesPage({ mainCategories, categoriesProducts }) {
@@ -55,7 +59,7 @@ export default function CategoriesPage({ mainCategories, categoriesProducts }) {
                         <CategoryTitle>
                             <div>
                                 <CatName href={"/category/"+cat._id}>
-                                    <h2>{cat.name}</h2>
+                                    <Title>{cat.name}</Title>
                                 </CatName>
                             </div>
                         </CategoryTitle>
