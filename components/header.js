@@ -21,9 +21,9 @@ const Wrapper = styled.div`
 `;
 
 const StyledNav = styled.nav.attrs((props) => ({
-  mobileNavActive: props.mobileNavActive.toString(),
+  mobilenavactive: props.mobilenavactive.toString(),
 }))`
-  ${(props) => (props.mobileNavActive === "true" ? `display: block;` : `display: none;`)}
+  ${(props) => (props.mobilenavactive === "true" ? `display: block;` : `display: none;`)}
   gap: 15px;
   position: fixed;
   top: 0;
@@ -66,13 +66,13 @@ const NavButton = styled.button`
 
 export default function Header() {
   const { cartProducts } = useContext(CartContext);
-  const [mobileNavActive, setMobileNavActive] = useState(false);
+  const [mobilenavactive, setMobileNavActive] = useState(false);
   return (
     <StyledHeader>
       <Center>
         <Wrapper>
           <Logo href={"/"}>Fofos</Logo>
-          <StyledNav mobileNavActive={mobileNavActive}>
+          <StyledNav mobilenavactive={mobilenavactive}>
             <NavLink href={"/"}>Início</NavLink>
             <NavLink href={"/products"}>Produtos</NavLink>
             <NavLink href={"/categories"}>Categorias</NavLink>

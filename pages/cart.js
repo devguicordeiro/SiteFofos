@@ -24,7 +24,7 @@ const Box = styled.div`
   padding: 30px;
 `;
 
-const ProductInfoCell = styled.div`
+const ProductInfoCell = styled.th`
   padding: 10px 0;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 `;

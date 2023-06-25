@@ -14,7 +14,7 @@ export default function CategoriesPage({ categories }) {
             <Header />
             <Center>
                 {categories.map(cat => (
-                    <div key={cat.id}>
+                    <div key={cat._id}>
                         <h2>{cat.name}</h2>
                     </div>
                 ))}
