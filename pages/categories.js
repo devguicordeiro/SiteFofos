@@ -3,11 +3,6 @@ import Header from "@/components/header";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Category } from "@/models/Category";
 import { Product } from "@/models/Product";
-import { styled } from "styled-components";
-
-const Title = styled.h1`
-    font-size: 1.5em;
-`;
 
 export default function CategoriesPage({ mainCategories, categoriesProducts }) {
     return (
@@ -35,7 +30,12 @@ export async function getServerSideProps() {
     const mainCategories = categories.filter(c => !c.parent);
     const categoriesProducts = {}; 
     for (const mainCat of mainCategories) {
-        const products = await Product.find({category: mainCat._id}, null, {limit:3, sort:{"_id": -1}});
+        const mainCatId = mainCat._id.toString();
+        const childCatIds = categories
+            .filter(c => c?.parent?.toString() === mainCatId)
+            .map(c => c._id);
+        const categoriesIds = [mainCatId, ...childCatIds];
+        const products = await Product.find({category: categoriesIds}, null, {limit:3, sort:{"_id": -1}});
         categoriesProducts[mainCat._id] = products;
     }
     return {
