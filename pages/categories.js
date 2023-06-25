@@ -4,6 +4,7 @@ import Header from "@/components/header";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Category } from "@/models/Category";
 import { Product } from "@/models/Product";
+import Link from "next/link";
 import { styled } from "styled-components";
 
 const CategoryGrid = styled.div `
@@ -15,9 +16,33 @@ const CategoryGrid = styled.div `
     }
 `;
 
-const CategoryTitle = styled.h2 `
+const CategoryTitle = styled.div `
     margin-top: 40px;
     margin-bottom: 10px;
+    display:flex;
+    align-items: center;
+    gap: 20px;
+    a {
+        color: #333;
+    }
+`;
+
+const ShowAllSquare = styled(Link) `
+    background-color: #ddd;
+    border-radius: 5px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    text-decoration: none;
+`;
+
+const CatName = styled(Link) `
+    text-decoration: none;
+    h2:hover {
+        color: fuchsia;
+    }
 `;
 
 export default function CategoriesPage({ mainCategories, categoriesProducts }) {
@@ -27,11 +52,20 @@ export default function CategoriesPage({ mainCategories, categoriesProducts }) {
             <Center>
                 {mainCategories.map(cat => (
                     <div key={cat._id}>
-                        <CategoryTitle>{cat.name}</CategoryTitle>
+                        <CategoryTitle>
+                            <div>
+                                <CatName href={"/category/"+cat._id}>
+                                    <h2>{cat.name}</h2>
+                                </CatName>
+                            </div>
+                        </CategoryTitle>
                         <CategoryGrid>
                             {categoriesProducts[cat._id].map(p => (
                                 <ProductBox {...p} />
                             ))}
+                            <ShowAllSquare href={"/category/"+cat._id}>
+                                Mostrar todos
+                            </ShowAllSquare>
                         </CategoryGrid>
                     </div>
                 ))}
