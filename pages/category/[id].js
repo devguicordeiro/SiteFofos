@@ -3,6 +3,7 @@ import Center from "@/components/center";
 import Header from "@/components/header";
 import { Category } from "@/models/Category";
 import { Product } from "@/models/Product";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
@@ -50,8 +51,17 @@ export default function CategoryPage({category, subCategories, products:original
         });
     }
     useEffect(() => {
-        const catIds = [category.id, ...subCategories.map(c => c._id)];
-        
+        const catIds = [category._id, ...(subCategories?.map(c => c._id) || [])];
+        const params = new URLSearchParams;
+        params.set("categories", catIds.join(","))
+        filtersValues.forEach(f => {
+            params.set(f.name, f.value);
+        });
+        const url = `/api/products?` + params.toString();
+        axios.get(url).then(res => {
+            res.data;
+        });
+
     }, [filtersValues])
 
     return (
