@@ -15,6 +15,26 @@ const CategoryHeader = styled.div `
     justify-content: space-between;
 `;
 
+const FiltersWrapper = styled.div `
+    display: flex;
+    gap: 15px;
+`;
+
+const Filter = styled.div `
+    background-color: #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    gap: 5px;
+    select{
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: inherit;
+    }
+`;
+
 export default function CategoryPage({category, products}) {
     return (
         <>
@@ -22,10 +42,10 @@ export default function CategoryPage({category, products}) {
             <Center>
                 <CategoryHeader>
                     <Title>{category.name}</Title>
-                    <div>
+                    <FiltersWrapper>
                         {category.properties.map(prop => (
-                            <div>
-                                {prop.name}
+                            <Filter>
+                                <span>{prop.name}</span>
                                 <select>
                                     {prop.values.map(val => (
                                         <option value={val}>
@@ -33,9 +53,9 @@ export default function CategoryPage({category, products}) {
                                         </option>
                                     ))}
                                 </select>
-                            </div>
+                            </Filter>
                         ))}
-                    </div>
+                    </FiltersWrapper>
                 </CategoryHeader>
                 <ProductsGrid products={products}></ProductsGrid>
             </Center>
