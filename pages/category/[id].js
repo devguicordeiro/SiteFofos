@@ -9,12 +9,34 @@ const Title = styled.h1`
     font-size: 1.5em;
 `;
 
+const CategoryHeader = styled.div `
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
 export default function CategoryPage({category, products}) {
     return (
         <>
             <Header></Header>
             <Center>
-                <Title>{category.name}</Title>
+                <CategoryHeader>
+                    <Title>{category.name}</Title>
+                    <div>
+                        {category.properties.map(prop => (
+                            <div>
+                                {prop.name}
+                                <select>
+                                    {prop.values.map(val => (
+                                        <option value={val}>
+                                            {val}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        ))}
+                    </div>
+                </CategoryHeader>
                 <ProductsGrid products={products}></ProductsGrid>
             </Center>
         </>
