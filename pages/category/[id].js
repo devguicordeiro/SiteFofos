@@ -3,7 +3,7 @@ import Center from "@/components/center";
 import Header from "@/components/header";
 import { Category } from "@/models/Category";
 import { Product } from "@/models/Product";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 const Title = styled.h1`
@@ -36,7 +36,8 @@ const Filter = styled.div `
     }
 `;
 
-export default function CategoryPage({category, products}) {
+export default function CategoryPage({category, subCategories, products:originalProducts}) {
+    const [products, setProducts] = useState(originalProducts);
     const [filtersValues, setFiltersValues] = useState(category.properties
         .map(p => ({name:p.name, value:"all"})));
     function handleFilterChange(filterName, filterValue) {
@@ -48,6 +49,10 @@ export default function CategoryPage({category, products}) {
             return newValues;
         });
     }
+    useEffect(() => {
+        const catIds = [category.id, ...subCategories.map(c => c._id)];
+        
+    }, [filtersValues])
 
     return (
         <>
@@ -62,7 +67,7 @@ export default function CategoryPage({category, products}) {
                                 <select
                                 onChange={ev => handleFilterChange(prop.name, ev.target.value)} 
                                 value={filtersValues.find(f => f.name === prop.name).value}>
-                                    <option value="all">Nenhuma</option>
+                                    <option value="all">---</option>
                                     {prop.values.map(val => (
                                         <option key={val} value={val}>
                                             {val}
@@ -89,6 +94,7 @@ export async function getServerSideProps(context) {
         props: {
             category: JSON.parse(JSON.stringify(category)),
             products: JSON.parse(JSON.stringify(products)),
+            subCategories: JSON.parse(JSON.stringify(products)),
         }
     };
 }
