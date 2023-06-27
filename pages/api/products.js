@@ -7,10 +7,9 @@ export default async function handle(req, res) {
     const  productsQuery = {
         category:categories.split(","),
     };
-    if (Object.keys(filters).length > 0) {
-        Object.keys(filters).forEach(filterName => {
-            productsQuery["properties."+filterName] = filters[filterName];
-        });
-    }
+        if(Object.keys(filters).length > 0) {
+            productsQuery.properties = filters;
+        }
+        console.log(productsQuery)
     res.json(await Product.find(productsQuery));
 }
