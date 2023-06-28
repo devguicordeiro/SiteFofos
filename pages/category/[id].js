@@ -37,34 +37,47 @@ const Filter = styled.div `
     }
 `;
 
-export default function CategoryPage({category, subCategories, products:originalProducts}) {
-    const [products, setProducts] = useState(originalProducts);
-    const [filtersValues, setFiltersValues] = useState(category.properties
-        .map(p => ({name:p.name, value:"all"})));
+export default function CategoryPage({
+    category,subCategories,products:originalProducts
+  }) {
+    const defaultSorting = '_id-desc';
+    const defaultFilterValues = category.properties
+      .map(p => ({name:p.name,value:'all'}));
+    const [products,setProducts] = useState(originalProducts);
+    const [filtersValues,setFiltersValues] = useState(defaultFilterValues);
+    const [sort,setSort] = useState(defaultSorting);
+    const [loadingProducts,setLoadingProducts] = useState(false);
+    const [filtersChanged,setFiltersChanged] = useState(false);
+  
     function handleFilterChange(filterName, filterValue) {
-        setFiltersValues(prev => {
-            const newValues = prev.map(p => ({
-                name: p.name,
-                value: p.name === filterName ? filterValue : p.value,
-            }));
-            return newValues;
-        });
+      setFiltersValues(prev => {
+        return prev.map(p => ({
+          name:p.name,
+          value: p.name === filterName ? filterValue : p.value,
+        }));
+      });
+      setFiltersChanged(true);
     }
     useEffect(() => {
-        const catIds = [category._id, ...(subCategories?.map(c => c._id) || [])];
-        const params = new URLSearchParams;
-        params.set("categories", catIds.join(","))
-        filtersValues.forEach(f => {
-            if (f.value !== "all") {
-            params.set(f.name, f.value);
-            }
-        });
-        const url = "/api/products?" + params.toString();
-        axios.get(url).then(res => {
-            setProducts(res.data);
-        });
-
-    }, [filtersValues])
+      if (!filtersChanged) {
+        return;
+      }
+      setLoadingProducts(true);
+      const catIds = [category._id, ...(subCategories?.map(c => c._id) || [])];
+      const params = new URLSearchParams;
+      params.set('categories', catIds.join(','));
+      params.set('sort', sort);
+      filtersValues.forEach(f => {
+        if (f.value !== 'all') {
+          params.set(f.name, f.value);
+        }
+      });
+      const url = `/api/products?` + params.toString();
+      axios.get(url).then(res => {
+        setProducts(res.data);
+        setLoadingProducts(false);
+      })
+    }, [filtersValues, sort, filtersChanged]);
 
     return (
         <>
@@ -77,13 +90,11 @@ export default function CategoryPage({category, subCategories, products:original
                             <Filter key={prop.name}>
                                 <span>{prop.name}:</span>
                                 <select
-                                onChange={ev => handleFilterChange(prop.name, ev.target.value)} 
-                                value={filtersValues.find(f => f.name === prop.name).value}>
-                                    <option value="all">---</option>
+                                    onChange={ev => handleFilterChange(prop.name, ev.target.value)}
+                                    value={filtersValues.find(f => f.name === prop.name).value}>
+                                    <option value="all">All</option>
                                     {prop.values.map(val => (
-                                        <option key={val} value={val}>
-                                            {val}
-                                        </option>
+                                        <option key={val} value={val}>{val}</option>
                                     ))}
                                 </select>
                             </Filter>
