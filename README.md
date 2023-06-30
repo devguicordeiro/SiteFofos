@@ -8,4 +8,5 @@ https://github.com/devguicordeiro
 </br>
 </br>
 This project is supposed to be slow, im working on it while learning. </br>
-it means that i usually spend one hour max per day on it 
+it means that i usually spend one hour max per day on it  </br>
+Must fix clear function after success purchase and single category sort.
