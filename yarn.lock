@@ -3361,6 +3361,11 @@ react-fast-compare@^3.1.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.2.tgz#929a97a532304ce9fee4bcae44234f1ce2c21d49"
   integrity sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==
 
+react-flying-item@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-flying-item/-/react-flying-item-1.1.2.tgz#8219235964248d83e950af89b3171e1a606e4366"
+  integrity sha512-lR8wGHe5t5M7HhDZX8ry7T0C1RVkzw7Gfou3KAtpRolBZ0HlhDdtO0zgsxL+iLEnEJFe7HaTbVnZ9bdpBmB6LQ==
+
 react-helmet@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-6.1.0.tgz#a750d5165cb13cf213e44747502652e794468726"
