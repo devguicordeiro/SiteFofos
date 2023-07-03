@@ -8,6 +8,7 @@ text-decoration: none;
 cursor: pointer;
 display: inline-flex;
 align-items: center;
+font-size: 16px;
 svg{
     height: 16px;
     margin-right: 5px;

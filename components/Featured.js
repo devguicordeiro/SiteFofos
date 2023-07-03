@@ -81,7 +81,7 @@ export default function Featured({product}) {
                     </div>
                    </Column>
                     <Column>
-                        <img src="https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg" alt="alt"/>
+                        <img src={product?.images?.[0]} alt="alt"/>
                     </Column>
                 </ColumnsWrapper>
             </Center>

@@ -7,6 +7,8 @@ import MenuIcon from "./icons/MenuIcon";
 
 const StyledHeader = styled.header`
   background-color: #333;
+  position: sticky;
+  top: 0;
 `;
 const Logo = styled(Link)`
   color: #fff;
