@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Button from "./Button";
+import Button, { ButtonStyle } from "./Button";
 import CartIcon from "./icons/CartIcon";
 import Link from "next/link";
 import { CartContext } from "./CartContext";
@@ -47,7 +47,12 @@ const Price = styled.div`
 `;
 
 const ButtonWrapper = styled.div`
-  button: 5px solid red;
+  button{
+    ${ButtonStyle}
+    background-color: transparent;
+    color: fuchsia;
+    border: 2px solid fuchsia;
+  }
 `;
 
 export default function ProductBox({ _id, title, description, price, images }) {
@@ -70,11 +75,11 @@ export default function ProductBox({ _id, title, description, price, images }) {
                         targetLeft={"90%"}
                         flyingItemStyling={{width: "auto",
                                             height: "auto",
-                                            maxWidth: "100px",
-                                            maxHeight: "100px",
+                                            maxWidth: "60px",
+                                            maxHeight: "60px",
                                             borderRadius: "0",
                         }}>
-            ---- <CartIcon />
+          <CartIcon />
           </FlyingButton>
           </ButtonWrapper>
         </PriceRow>
