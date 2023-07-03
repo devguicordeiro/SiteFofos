@@ -7,16 +7,22 @@ import { CartContext } from "./CartContext";
 const FlyingButtonWrapper = styled.div`
   button{
     ${ButtonStyle}
-    background-color: transparent;
-    color: fuchsia;
-    border: 2px solid fuchsia;
-  }
+    ${props => props.main ? `
+        background-color: black;
+        color: white;
+        border: 2px solid fuchsia;
+    ` : `
+        background-color: transparent;
+        color: fuchsia;
+        border: 2px solid fuchsia;
+    `}
+    }
 `;
 
 export default function FlyingButtonComponent(props) {
     const {addProduct} = useContext(CartContext);
     return (
-        <FlyingButtonWrapper onClick={() => addProduct(props._id)}>
+        <FlyingButtonWrapper main={props.main} onClick={() => addProduct(props._id)}>
             <FlyingButtonOriginal 
                 {...props}
                 targetTop={"5%"} 

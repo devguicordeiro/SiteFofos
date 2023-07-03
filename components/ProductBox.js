@@ -4,7 +4,7 @@ import CartIcon from "./icons/CartIcon";
 import Link from "next/link";
 import { CartContext } from "./CartContext";
 import { useContext } from "react";
-import FlyingButtonWrapper from "./FlyingButtonWrapper";
+import FlyingButtonComponent from "./FlyingButtonWrapper";
 
 const ProductWrapper = styled.div``;
 
@@ -61,9 +61,9 @@ export default function ProductBox({ _id, title, description, price, images }) {
         <Title href={url}>{title}</Title>
         <PriceRow>
           <Price>R$ {price}</Price>
-          <FlyingButtonWrapper _id={_id} src={images?.[0]}>
+          <FlyingButtonComponent _id={_id} src={images?.[0]}>
             <CartIcon></CartIcon>
-          </FlyingButtonWrapper>
+          </FlyingButtonComponent>
         </PriceRow>
       </ProductInfoBox>
     </ProductWrapper>

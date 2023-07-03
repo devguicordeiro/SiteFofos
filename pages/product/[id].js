@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import { CartContext } from "@/components/CartContext";
+import FlyingButtonComponent from "@/components/FlyingButtonWrapper";
 import ProductImages from "@/components/ProductImages";
 import WhiteBox from "@/components/WhiteBox";
 import Center from "@/components/center";
@@ -52,7 +53,9 @@ export default function ProductPage({product}) {
                                     R${product.price}
                                 </Price>
                                 <div>
-                                    <Button onClick={() => addProduct(product._id)} primary><CartIcon/>Adicionar ao Carrinho</Button>
+                                    <FlyingButtonComponent main _id={product._id} src={product.images?.[0]}>
+                                        <CartIcon/>Adicionar ao Carrinho
+                                    </FlyingButtonComponent>
                                 </div>
                             </PriceRow>
                         </div>
