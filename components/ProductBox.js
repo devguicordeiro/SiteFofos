@@ -4,7 +4,7 @@ import CartIcon from "./icons/CartIcon";
 import Link from "next/link";
 import { CartContext } from "./CartContext";
 import { useContext } from "react";
-import FlyingButton from "react-flying-item";
+import FlyingButtonWrapper from "./FlyingButtonWrapper";
 
 const ProductWrapper = styled.div``;
 
@@ -46,14 +46,6 @@ const Price = styled.div`
   font-weight: 500;
 `;
 
-const ButtonWrapper = styled.div`
-  button{
-    ${ButtonStyle}
-    background-color: transparent;
-    color: fuchsia;
-    border: 2px solid fuchsia;
-  }
-`;
 
 export default function ProductBox({ _id, title, description, price, images }) {
   const url = "/product/" + _id;
@@ -69,19 +61,9 @@ export default function ProductBox({ _id, title, description, price, images }) {
         <Title href={url}>{title}</Title>
         <PriceRow>
           <Price>R$ {price}</Price>
-          <ButtonWrapper onClick={() => addProduct(_id)}>
-          <FlyingButton src={images?.[0]} 
-                        targetTop={"5%"} 
-                        targetLeft={"90%"}
-                        flyingItemStyling={{width: "auto",
-                                            height: "auto",
-                                            maxWidth: "60px",
-                                            maxHeight: "60px",
-                                            borderRadius: "0",
-                        }}>
-          <CartIcon />
-          </FlyingButton>
-          </ButtonWrapper>
+          <FlyingButtonWrapper _id={_id} src={images?.[0]}>
+            <CartIcon></CartIcon>
+          </FlyingButtonWrapper>
         </PriceRow>
       </ProductInfoBox>
     </ProductWrapper>
