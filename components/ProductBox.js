@@ -46,6 +46,10 @@ const Price = styled.div`
   font-weight: 500;
 `;
 
+const ButtonWrapper = styled.div`
+  button: 5px solid red;
+`;
+
 export default function ProductBox({ _id, title, description, price, images }) {
   const url = "/product/" + _id;
   const { addProduct } = useContext(CartContext);
@@ -60,11 +64,19 @@ export default function ProductBox({ _id, title, description, price, images }) {
         <Title href={url}>{title}</Title>
         <PriceRow>
           <Price>R$ {price}</Price>
-          <FlyingButton src={images?.[0]} targetTop={"5%"} targetLeft={"90%"}>
-            <Button onClick={() => addProduct(_id)} white={1}>
-              <CartIcon />
-            </Button>
+          <ButtonWrapper onClick={() => addProduct(_id)}>
+          <FlyingButton src={images?.[0]} 
+                        targetTop={"5%"} 
+                        targetLeft={"90%"}
+                        flyingItemStyling={{width: "auto",
+                                            height: "auto",
+                                            maxWidth: "100px",
+                                            maxHeight: "100px",
+                                            borderRadius: "0",
+                        }}>
+            ---- <CartIcon />
           </FlyingButton>
+          </ButtonWrapper>
         </PriceRow>
       </ProductInfoBox>
     </ProductWrapper>
