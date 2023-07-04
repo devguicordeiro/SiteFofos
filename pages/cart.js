@@ -5,6 +5,7 @@ import Table from "@/components/Table";
 import Center from "@/components/center";
 import Header from "@/components/header";
 import axios from "axios";
+import { RevealWrapper } from "next-reveal";
 import { useContext, useEffect, useState } from "react";
 import { styled } from "styled-components";
 
@@ -144,6 +145,7 @@ export default function CartPage() {
       <Header></Header>
       <Center>
         <ColumnsWrapper>
+        <RevealWrapper delay={0}>
           <Box>
             <h2>Carrinho</h2>
             {!cartProducts?.length && <div>Seu carrinho está vazio</div>}
@@ -182,7 +184,9 @@ export default function CartPage() {
               </Table>
             )}
           </Box>
+          </RevealWrapper>
           {!!cartProducts?.length && (
+          <RevealWrapper delay={100}>
             <Box>
               <h2>Informação do pedido</h2>
               <Input
@@ -242,6 +246,7 @@ export default function CartPage() {
                 Continuar para pagamento
               </Button>
             </Box>
+          </RevealWrapper>
           )}
         </ColumnsWrapper>
       </Center>

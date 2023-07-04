@@ -9,6 +9,7 @@ const StyledHeader = styled.header`
   background-color: #333;
   position: sticky;
   top: 0;
+  z-index:10;
 `;
 const Logo = styled(Link)`
   color: #fff;
