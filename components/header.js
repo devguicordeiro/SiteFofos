@@ -69,6 +69,19 @@ const NavButton = styled.button`
   }
 `;
 
+const SideIcons = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  a{
+    display: inline-block;
+    min-width: 26px;
+    color: white;
+    svg{
+    }
+  }
+`;
+
 export default function Header() {
   const { cartProducts } = useContext(CartContext);
   const [mobilenavactive, setMobileNavActive] = useState(false);
@@ -84,10 +97,12 @@ export default function Header() {
             <NavLink href={"/account"}>Conta</NavLink>
             <NavLink href={"/cart"}>Carrinho ({cartProducts.length})</NavLink>
           </StyledNav>
-          <NavLink href={"/search"}><SearchIcon/></NavLink>
-          <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
-            <MenuIcon></MenuIcon>
-          </NavButton>
+          <SideIcons>
+            <Link href={"/search"}><SearchIcon/></Link>
+            <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
+              <MenuIcon></MenuIcon>
+            </NavButton>
+          </SideIcons>
         </Wrapper>
       </Center>
     </StyledHeader>
