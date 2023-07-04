@@ -71,7 +71,7 @@ export default function Featured({product}) {
                                 <ButtonLink href={"/product/"+product?._id} outline={1} white={1}>
                                     Saiba Mais
                                 </ButtonLink>
-                                <FlyingButtonComponent main _id={product?._id} src={product?.images?.[0]}>
+                                <FlyingButtonComponent _id={product?._id} src={product?.images?.[0]}>
                                     <CartIcon/> Adicionar ao Carrinho
                                 </FlyingButtonComponent>
                             </ButtonsWrapper>

@@ -4,6 +4,7 @@ import Center from "./center";
 import { useContext, useState } from "react";
 import { CartContext } from "./CartContext";
 import MenuIcon from "./icons/MenuIcon";
+import SearchIcon from "./icons/SearchIcon";
 
 const StyledHeader = styled.header`
   background-color: #333;
@@ -47,6 +48,7 @@ const NavLink = styled(Link)`
   text-decoration: none;
   display: block;
   padding: 10px 0;
+  min-width: 25px;
   @media screen and (min-width: 768px) {
     padding: 0;
   }
@@ -82,6 +84,7 @@ export default function Header() {
             <NavLink href={"/account"}>Conta</NavLink>
             <NavLink href={"/cart"}>Carrinho ({cartProducts.length})</NavLink>
           </StyledNav>
+          <NavLink href={"/search"}><SearchIcon/></NavLink>
           <NavButton onClick={() => setMobileNavActive((prev) => !prev)}>
             <MenuIcon></MenuIcon>
           </NavButton>
