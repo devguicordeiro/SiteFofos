@@ -1,11 +1,9 @@
 import { styled } from "styled-components";
 import Center from "./center";
-import Button from "./Button";
 import ButtonLink from "./ButtonLink";
 import CartIcon from "./icons/CartIcon";
-import { useContext } from "react";
-import { CartContext } from "./CartContext";
 import FlyingButtonComponent from "./FlyingButtonWrapper";
+import {RevealWrapper} from "next-reveal";
 
 const Bg = styled.div`
  background-color: #333;
@@ -60,28 +58,30 @@ const ButtonsWrapper = styled.div`
 `;
 
 export default function Featured({product}) {
-    const{addProduct} = useContext(CartContext);
     return(
         <Bg>
             <Center>
                 <ColumnsWrapper>
                     <Column>
                     <div>
-                        <Title>{product?.title}</Title>
-                        <Desc>{product?.description}</Desc>
-                        <ButtonsWrapper>
-                            <ButtonLink href={"/product/"+product?._id} outline={1} white={1}>
-                                Saiba Mais
-                            </ButtonLink>
-                            <FlyingButtonComponent main _id={product?._id} src={product?.images?.[0]}>
-                                <CartIcon/> Adicionar ao Carrinho
-                            </FlyingButtonComponent>
-                        </ButtonsWrapper>
-                        
+                        <RevealWrapper origin={"left"}>
+                            <Title>{product?.title}</Title>
+                            <Desc>{product?.description}</Desc>
+                            <ButtonsWrapper>
+                                <ButtonLink href={"/product/"+product?._id} outline={1} white={1}>
+                                    Saiba Mais
+                                </ButtonLink>
+                                <FlyingButtonComponent main _id={product?._id} src={product?.images?.[0]}>
+                                    <CartIcon/> Adicionar ao Carrinho
+                                </FlyingButtonComponent>
+                            </ButtonsWrapper>
+                        </RevealWrapper>
                     </div>
                    </Column>
                     <Column>
-                        <img src={product?.images?.[0]} alt="alt"/>
+                        <RevealWrapper>
+                           <img src={product?.images?.[0]} alt="alt"/>
+                        </RevealWrapper>
                     </Column>
                 </ColumnsWrapper>
             </Center>
