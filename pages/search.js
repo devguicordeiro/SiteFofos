@@ -10,9 +10,16 @@ import { styled } from "styled-components";
 
 const SearchInput = styled(Input)`
     padding: 5px 10px;
-    margin: 20px;
     font-size: 1.3rem;
     border-radius: 5px; 
+
+`;
+
+const InputWrapper = styled.div`
+    position: sticky;
+    top: 48px;
+    margin: 25px 0;
+    padding: 5px 0;
 `;
 
 export default function SearchPage() {
@@ -40,11 +47,13 @@ export default function SearchPage() {
         <>
             <Header/>
             <Center>
-                <SearchInput 
-                    placeholder="Procure em nosso site..."
-                    value={phrase}
-                    onChange={ev => setPhrase(ev.target.value)}
-                    autoFocus />
+                <InputWrapper>
+                    <SearchInput 
+                        placeholder="Procure em nosso site..."
+                        value={phrase}
+                        onChange={ev => setPhrase(ev.target.value)}
+                        autoFocus />
+                </InputWrapper>
                     {!isLoading && phrase !== "" && products.length === 0 && (
                         <h2>Nenhum produto encontrado para pesquisa "{phrase}".</h2>
                     )}
