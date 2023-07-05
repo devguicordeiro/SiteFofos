@@ -7,6 +7,7 @@ import WhiteBox from "@/components/WhiteBox";
 import { RevealWrapper } from "next-reveal";
 import Input from "@/components/Input";
 import { useState } from "react";
+import axios from "axios";
 
 const Title = styled.h1`
     font-size: 1.5em;
@@ -43,6 +44,10 @@ export default function AccountPage() {
         await signIn("google", {
             callbackUrl: process.env.NEXT_PUBLIC_URL,
         });
+    }
+    function saveAddress() {
+        const data = {name, email, city, address, cep, complement, house,};
+        axios.put("/api/address", data);
     }
     return (
         <>
@@ -113,9 +118,10 @@ export default function AccountPage() {
                                         onChange={ev => setComplement(ev.target.value)}
                                         ></Input>
                                     </CityHolder>
-                                    <Button block={1} black={1}>
-                                        Continuar para pagamento
+                                    <Button onClick={saveAddress} block={1} black={1}>
+                                        Salvar
                                     </Button>
+                                    <hr />
                                 {session && (
                                     <Button primary={1} onClick={logout}>Logout</Button>
                                 )}
