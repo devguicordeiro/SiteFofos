@@ -1,6 +1,6 @@
 import mongoose, { Schema, model, models } from "mongoose";
 
-const AddressSchema = new Schema({
+const AddresssSchema = new Schema({
     userEmail: {type:String, unique:true, required:true},
     name: String,
     email: String,
@@ -11,4 +11,4 @@ const AddressSchema = new Schema({
     complement: String,
 });
 
-export const Address = models?.address || model("Address", AddressSchema);
+export const Addresss = models?.addresss || model("Addresss", AddresssSchema);

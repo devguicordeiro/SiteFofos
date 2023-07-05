@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import WhiteBox from "@/components/WhiteBox";
 import { RevealWrapper } from "next-reveal";
 import Input from "@/components/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Title = styled.h1`
@@ -45,10 +45,23 @@ export default function AccountPage() {
             callbackUrl: process.env.NEXT_PUBLIC_URL,
         });
     }
-    function saveAddress() {
+    function saveAddresss() {
         const data = {name, email, city, address, cep, complement, house,};
-        axios.put("/api/address", data);
+        axios.put("/api/addresss", data);
     }
+    useEffect(() => { 
+        setTimeout(() => {
+            axios.get("/api/addresss").then(response => {
+                setName(response.data.name);
+                setEmail(response.data.email);
+                setCity(response.data.city);
+                setCep(response.data.cep);
+                setAddress(response.data.address);
+                setHouse(response.data.house);
+                setComplement(response.data.complement);
+            });
+        })
+    }, []);
     return (
         <>
             <Header />
@@ -118,7 +131,7 @@ export default function AccountPage() {
                                         onChange={ev => setComplement(ev.target.value)}
                                         ></Input>
                                     </CityHolder>
-                                    <Button onClick={saveAddress} block={1} black={1}>
+                                    <Button onClick={saveAddresss} block={1} black={1}>
                                         Salvar
                                     </Button>
                                     <hr />
