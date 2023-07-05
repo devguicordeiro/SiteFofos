@@ -13,11 +13,13 @@ export default function AccountPage() {
     const {data:session} = useSession();
     async function logout() {
         await signOut({
-            callbackUrl: process.env.NEXT_PUBLIC_URL
+            callbackUrl: process.env.NEXT_PUBLIC_URL,
         });
     }
     async function login() {
-        await signIn("google");
+        await signIn("google", {
+            callbackUrl: process.env.NEXT_PUBLIC_URL,
+        });
     }
     return (
         <>
@@ -28,7 +30,7 @@ export default function AccountPage() {
                     <Button primary={1} onClick={logout}>Logout</Button>
                 )}
                 {!session && (
-                    <Button primary onClick={login}>Login</Button>
+                    <Button primary={1} onClick={login}>Login</Button>
                 )}
             </Center>
         </>
