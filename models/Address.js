@@ -1,7 +1,7 @@
 import mongoose, { Schema, model, models } from "mongoose";
 
 const AddressSchema = new Schema({
-    user: mongoose.Types.ObjectId,
+    userEmail: {type:String, unique:true, required:true},
     name: String,
     email: String,
     city: String,
