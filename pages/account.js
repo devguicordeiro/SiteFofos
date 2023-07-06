@@ -45,22 +45,11 @@ export default function AccountPage() {
             callbackUrl: process.env.NEXT_PUBLIC_URL,
         });
     }
-    function saveAddresss() {
-        const data = {name, email, city, address, cep, complement, house,};
-        axios.put("/api/addresss", data);
+    function saveThread() {
+        const data = {name, email, city, cep, address, house, complement};
+        axios.put("/api/thread", data);
     }
     useEffect(() => { 
-        setTimeout(() => {
-            axios.get("/api/addresss").then(response => {
-                setName(response.data.name);
-                setEmail(response.data.email);
-                setCity(response.data.city);
-                setCep(response.data.cep);
-                setAddress(response.data.address);
-                setHouse(response.data.house);
-                setComplement(response.data.complement);
-            });
-        })
     }, []);
     return (
         <>
@@ -131,7 +120,7 @@ export default function AccountPage() {
                                         onChange={ev => setComplement(ev.target.value)}
                                         ></Input>
                                     </CityHolder>
-                                    <Button onClick={saveAddresss} block={1} black={1}>
+                                    <Button onClick={saveThread} block={1} black={1}>
                                         Salvar
                                     </Button>
                                     <hr />
