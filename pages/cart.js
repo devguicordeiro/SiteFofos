@@ -92,6 +92,16 @@ export default function CartPage() {
       setIsSuccess(true);
       clearCart();
     }
+    axios.get("/api/thread").then(response => {
+      setName(response.data.name);
+      setEmail(response.data.email);
+      setCity(response.data.city);
+      setCep(response.data.cep);
+      setAddress(response.data.address);
+      setHouse(response.data.house);
+      setComplement(response.data.complement);
+    }
+    )
   }, []);
 
   function plusProduct(id) {

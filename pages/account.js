@@ -8,6 +8,7 @@ import { RevealWrapper } from "next-reveal";
 import Input from "@/components/Input";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Spinner from "@/components/Spinner";
 
 const Title = styled.h1`
     font-size: 1.5em;
@@ -35,6 +36,7 @@ export default function AccountPage() {
     const [address, setAddress] = useState("");
     const [house, setHouse] = useState("");
     const [complement, setComplement] = useState("");
+    const [loaded, setLoaded] = useState(false);
     async function logout() {
         await signOut({
             callbackUrl: process.env.NEXT_PUBLIC_URL,
@@ -50,15 +52,18 @@ export default function AccountPage() {
         axios.put("/api/thread", data);
     }
     useEffect(() => { 
-        axios.get("/api/thread").then(response => {
-            setName(response.data.name);
-            setEmail(response.data.email);
-            setCity(response.data.city);
-            setCep(response.data.cep);
-            setAddress(response.data.address);
-            setHouse(response.data.house);
-            setComplement(response.data.complement);
-        });
+        setTimeout(() => {
+            axios.get("/api/thread").then(response => {
+                setName(response.data.name);
+                setEmail(response.data.email);
+                setCity(response.data.city);
+                setCep(response.data.cep);
+                setAddress(response.data.address);
+                setHouse(response.data.house);
+                setComplement(response.data.complement);
+                setLoaded(true);
+            });
+        }, 0)
     }, []);
     return (
         <>
@@ -75,7 +80,12 @@ export default function AccountPage() {
                     <div>
                         <RevealWrapper delay={100}>
                             <WhiteBox>
-                                <h2>Detalhes da conta</h2>
+                            <h2>Detalhes da conta</h2>
+                            {!loaded && (
+                                <Spinner fullWidth={true}></Spinner>
+                            )}
+                                {loaded && (
+                                    <>
                                     <Input
                                         type="text"
                                         placeholder="Nome"
@@ -133,6 +143,8 @@ export default function AccountPage() {
                                         Salvar
                                     </Button>
                                     <hr />
+                                    </>
+                                )}
                                 {session && (
                                     <Button primary={1} onClick={logout}>Logout</Button>
                                 )}
