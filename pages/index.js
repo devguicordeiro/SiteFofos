@@ -7,12 +7,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { WishedProduct } from "@/models/WishedProduct"
 
-export default function HomePage({featuredProduct, newProducts}) {
+export default function HomePage({featuredProduct, newProducts, wishedNewProducts}) {
   return (
     <div>
       <Header></Header>
       <Featured product={featuredProduct}></Featured>
-      <NewProducts products={newProducts}></NewProducts>
+      <NewProducts products={newProducts} wishedProducts={wishedNewProducts}></NewProducts>
     </div>
   )
 }
@@ -27,10 +27,10 @@ export async function getServerSideProps(ctx) {
     userEmail:user.email,
     product: newProducts.map(p => p._id.toString()),
   });
-  console.log(wishedNewProducts);
   return {
     props: {featuredProduct: JSON.parse(JSON.stringify(featuredProduct)),
             newProducts: JSON.parse(JSON.stringify(newProducts)),
+            wishedNewProducts: wishedNewProducts.map(i => i.product.toString()),
     },
   };
 }
