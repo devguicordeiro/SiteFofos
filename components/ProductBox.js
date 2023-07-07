@@ -5,6 +5,7 @@ import Link from "next/link";
 import { CartContext } from "./CartContext";
 import { useContext } from "react";
 import FlyingButtonComponent from "./FlyingButtonWrapper";
+import HeartoutIcon from "./icons/HeartoutIcon";
 
 const ProductWrapper = styled.div``;
 
@@ -54,6 +55,7 @@ export default function ProductBox({ _id, title, description, price, images }) {
     <ProductWrapper>
       <FuchsiaBox href={url}>
         <div>
+          <HeartoutIcon />
           <img src={images?.[0]} alt={title} />
         </div>
       </FuchsiaBox>
