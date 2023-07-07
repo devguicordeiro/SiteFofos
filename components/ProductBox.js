@@ -18,6 +18,7 @@ const FuchsiaBox = styled(Link)`
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  position: relative;
   img {
     max-width: 100%;
     max-height: 80px;
@@ -47,6 +48,21 @@ const Price = styled.div`
   font-weight: 500;
 `;
 
+const WishlistButton = styled.button`
+  border: 0;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  svg{
+    width: 18px;
+  }
+`;
+
 
 export default function ProductBox({ _id, title, description, price, images }) {
   const url = "/product/" + _id;
@@ -55,7 +71,9 @@ export default function ProductBox({ _id, title, description, price, images }) {
     <ProductWrapper>
       <FuchsiaBox href={url}>
         <div>
-          <HeartoutIcon />
+          <WishlistButton>
+            <HeartoutIcon />
+          </WishlistButton>
           <img src={images?.[0]} alt={title} />
         </div>
       </FuchsiaBox>
