@@ -3,9 +3,10 @@ import Button, { ButtonStyle } from "./Button";
 import CartIcon from "./icons/CartIcon";
 import Link from "next/link";
 import { CartContext } from "./CartContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import FlyingButtonComponent from "./FlyingButtonWrapper";
 import HeartoutIcon from "./icons/HeartoutIcon";
+import HeartfillIcon from "./icons/HeartfillIcon";
 
 const ProductWrapper = styled.div``;
 
@@ -58,6 +59,11 @@ const WishlistButton = styled.button`
   padding: 0;
   background: none;
   cursor: pointer;
+  ${props => props.wished ? `
+    color: red;
+  ` : `
+    color: black;
+  `}
   svg{
     width: 18px;
   }
@@ -66,13 +72,18 @@ const WishlistButton = styled.button`
 
 export default function ProductBox({ _id, title, description, price, images }) {
   const url = "/product/" + _id;
-  const { addProduct } = useContext(CartContext);
+  const [isWished, setIsWished] = useState(false);
+  function addToWishlist(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    setIsWished(prev => !prev);
+  }
   return (
     <ProductWrapper>
       <FuchsiaBox href={url}>
         <div>
-          <WishlistButton>
-            <HeartoutIcon />
+          <WishlistButton wished={isWished} onClick={addToWishlist}>
+            {isWished ? <HeartfillIcon/> : <HeartoutIcon/>}
           </WishlistButton>
           <img src={images?.[0]} alt={title} />
         </div>
