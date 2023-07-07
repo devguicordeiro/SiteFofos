@@ -9,6 +9,11 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Ubuntu', sans-serif;
     background-color: #eee;
   }
+  hr{
+    display: block;
+    border: 0;
+    border-top: 1px solid #ccc;
+  }
 `;
 
 export default function App({ Component, pageProps: {session, ... pageProps} }) {
