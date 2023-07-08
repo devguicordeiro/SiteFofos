@@ -9,13 +9,11 @@ const Title = styled.h2`
 `;
 
 export default function NewProducts({ products , wishedProducts}) {
-  console.log({wishedProducts})
   return (
     <div>
       <Center>
         <Title>Novidades</Title>
-          <ProductsGrid products={products}>
-
+          <ProductsGrid products={products} wishedProducts={wishedProducts}>
           </ProductsGrid>
       </Center>
     </div>

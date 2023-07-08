@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import FlyingButtonComponent from "./FlyingButtonWrapper";
 import HeartoutIcon from "./icons/HeartoutIcon";
 import HeartfillIcon from "./icons/HeartfillIcon";
+import axios from "axios";
 
 const ProductWrapper = styled.div``;
 
@@ -70,13 +71,17 @@ const WishlistButton = styled.button`
 `;
 
 
-export default function ProductBox({ _id, title, description, price, images }) {
+export default function ProductBox({ _id, title, description, price, images, wished=false }) {
   const url = "/product/" + _id;
-  const [isWished, setIsWished] = useState(false);
+  const [isWished, setIsWished] = useState(wished);
   function addToWishlist(ev) {
     ev.preventDefault();
     ev.stopPropagation();
-    setIsWished(prev => !prev);
+    const nextValue = !isWished;
+    axios.post("/api/wishlist", {
+      product: _id,
+    }).then(() => {});
+    setIsWished(nextValue);
   }
   return (
     <ProductWrapper>

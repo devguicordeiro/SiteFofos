@@ -15,7 +15,7 @@ export default function HomePage({featuredProduct, newProducts, wishedNewProduct
       <NewProducts products={newProducts} wishedProducts={wishedNewProducts}></NewProducts>
     </div>
   )
-}
+} 
 
 export async function getServerSideProps(ctx) {
   const featuredProductId = "649cb35f5a19a26d55334838";
