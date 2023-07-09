@@ -21,6 +21,9 @@ const ColsWrapper = styled.div`
     grid-template-columns: 1.2fr .8fr;
     gap: 40px;
     margin: 40px 0;
+    p{
+        margin: 15px;
+    }
 `;
 
 const CityHolder = styled.div`
@@ -42,8 +45,8 @@ export default function AccountPage() {
     const [address, setAddress] = useState("");
     const [house, setHouse] = useState("");
     const [complement, setComplement] = useState("");
-    const [loaded, setLoaded] = useState(false);
-    const [wishedLoaded, setWishedLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(true);
+    const [wishedLoaded, setWishedLoaded] = useState(true);
     const [wishedProducts, setWishedProducts] = useState([]);
     async function logout() {
         await signOut({
@@ -60,7 +63,12 @@ export default function AccountPage() {
         axios.put("/api/thread", data);
     }
     useEffect(() => { 
+        if(!session) {
+            return;
+        }
             axios.get("/api/thread").then(response => {
+                setLoaded(false);
+                setWishedLoaded(false);
                 setName(response.data.name);
                 setEmail(response.data.email);
                 setCity(response.data.city);
@@ -74,7 +82,7 @@ export default function AccountPage() {
                 setWishedProducts(response.data.map(wp => wp.product));
                 setWishedLoaded(true);
             })
-    }, []);
+    }, [session]);
     function producetRemovedWish(idToRemove) {
         setWishedProducts(products => {
             return [...products.filter(p => p._id.toString() !== idToRemove )];
@@ -102,9 +110,16 @@ export default function AccountPage() {
                                          ))}
                                          {wishedProducts.length === 0 && (
                                             <>
-                                                <p>
-                                                    A sua lista de desejos está vazia
-                                                </p>
+                                                {session && (
+                                                    <p>
+                                                        A sua lista de desejos está vazia
+                                                    </p>
+                                                )}
+                                                {!session && (
+                                                    <p>
+                                                        Faça login para adicionar produtos a sua lista
+                                                    </p>
+                                                )}
                                             </>
                                          )}
                                   </WishedGrid>
@@ -115,11 +130,11 @@ export default function AccountPage() {
                     <div>
                         <RevealWrapper delay={100}>
                             <WhiteBox>
-                            <h2>Detalhes da conta</h2>
+                            <h2>{session ? "Lista de desejos" : "Você está offline"}</h2>
                             {!loaded && (
                                 <Spinner fullWidth={true}></Spinner>
                             )}
-                                {loaded && (
+                                {loaded && session && (
                                     <>
                                     <Input
                                         type="text"
@@ -184,7 +199,7 @@ export default function AccountPage() {
                                     <Button primary={1} onClick={logout}>Logout</Button>
                                 )}
                                 {!session && (
-                                    <Button primary={1} onClick={login}>Login</Button>
+                                    <Button primary={1} onClick={login}>Entrar com google</Button>
                                 )}
                             </WhiteBox>
                         </RevealWrapper>

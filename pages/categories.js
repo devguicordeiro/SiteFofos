@@ -101,11 +101,14 @@ export async function getServerSideProps(ctx) {
         allFechedProductsId.push(...products.map(p => p._id.toString( )))
         categoriesProducts[mainCat._id] = products;
     }
-    const {user} = await getServerSession(ctx.req, ctx.res, authOptions)
-    const wishedProducts = await WishedProduct?.find({
-      userEmail:user.email,
-      product: allFechedProductsId,
-    });
+    const session = await getServerSession(ctx.req, ctx.res, authOptions)
+    const wishedProducts = session?.user 
+        ?
+        await WishedProduct?.find({
+        userEmail:session?.user.email,
+        product: allFechedProductsId,
+    }) :
+        [];
 
     return {
         props: {
