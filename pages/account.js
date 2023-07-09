@@ -52,7 +52,6 @@ export default function AccountPage() {
         axios.put("/api/thread", data);
     }
     useEffect(() => { 
-        setTimeout(() => {
             axios.get("/api/thread").then(response => {
                 setName(response.data.name);
                 setEmail(response.data.email);
@@ -63,7 +62,9 @@ export default function AccountPage() {
                 setComplement(response.data.complement);
                 setLoaded(true);
             });
-        }, 0)
+            axios.get("/api/wishlist").then(response => {
+                console.log(response.data);
+            })
     }, []);
     return (
         <>
