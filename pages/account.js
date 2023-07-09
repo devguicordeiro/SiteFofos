@@ -75,6 +75,12 @@ export default function AccountPage() {
                 setWishedLoaded(true);
             })
     }, []);
+    function producetRemovedWish(idToRemove) {
+        setWishedProducts(products => {
+            return [...products.filter(p => p._id.toString() !== idToRemove )];
+        })
+    }
+
     return (
         <>
             <Header />
@@ -91,7 +97,8 @@ export default function AccountPage() {
                                     <WishedGrid>
                                         {wishedProducts.length > 0 && wishedProducts.map
                                             (wp => (
-                                        <ProductBox {...wp} wished="true" key={wp._id}/>
+                                        <ProductBox {...wp} wished="true"
+                                             key={wp._id} onRemoveHeart={producetRemovedWish} />
                                          ))}
                                   </WishedGrid>
                                 )}

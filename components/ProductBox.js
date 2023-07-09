@@ -71,13 +71,19 @@ const WishlistButton = styled.button`
 `;
 
 
-export default function ProductBox({ _id, title, description, price, images, wished=false }) {
+export default function ProductBox({
+        _id, title, description, price,
+        images, wished=false, onRemoveHeart=() => {},
+      }) {
   const url = "/product/" + _id;
   const [isWished, setIsWished] = useState(wished);
   function addToWishlist(ev) {
     ev.preventDefault();
     ev.stopPropagation();
     const nextValue = !isWished;
+    if (nextValue === false && onRemoveHeart) {
+      onRemoveHeart(_id);
+    }
     axios.post("/api/wishlist", {
       product: _id,
     }).then(() => {});
