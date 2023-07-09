@@ -9,6 +9,7 @@ import Input from "@/components/Input";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "@/components/Spinner";
+import ProductBox from "@/components/ProductBox";
 
 const Title = styled.h1`
     font-size: 1.5em;
@@ -27,6 +28,11 @@ const CityHolder = styled.div`
   gap: 5px;
 `;
 
+const WishedGrid = styled.div`
+    display: grid;
+    gap: 20px;
+`;
+
 export default function AccountPage() {
     const {data:session} = useSession();
     const [name, setName] = useState("");
@@ -37,6 +43,8 @@ export default function AccountPage() {
     const [house, setHouse] = useState("");
     const [complement, setComplement] = useState("");
     const [loaded, setLoaded] = useState(false);
+    const [wishedLoaded, setWishedLoaded] = useState(false);
+    const [wishedProducts, setWishedProducts] = useState([]);
     async function logout() {
         await signOut({
             callbackUrl: process.env.NEXT_PUBLIC_URL,
@@ -63,7 +71,8 @@ export default function AccountPage() {
                 setLoaded(true);
             });
             axios.get("/api/wishlist").then(response => {
-                console.log(response.data);
+                setWishedProducts(response.data.map(wp => wp.product));
+                setWishedLoaded(true);
             })
     }, []);
     return (
@@ -75,6 +84,17 @@ export default function AccountPage() {
                         <RevealWrapper delay={0}>
                             <WhiteBox>
                                 <h2>Lista de desejos</h2>
+                                {!wishedLoaded && (
+                                    <Spinner fullWidth={true} />
+                                )}
+                                {wishedLoaded && (
+                                    <WishedGrid>
+                                        {wishedProducts.length > 0 && wishedProducts.map
+                                            (wp => (
+                                        <ProductBox {...wp} wished="true" key={wp._id}/>
+                                         ))}
+                                  </WishedGrid>
+                                )}
                             </WhiteBox>
                         </RevealWrapper>
                     </div>
