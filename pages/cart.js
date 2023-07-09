@@ -94,7 +94,7 @@ export default function CartPage() {
       setIsSuccess(true);
       clearCart();
     }    
-  }, []);
+  }, [clearCart]);
 
   useEffect(() => {
     if (!session){
