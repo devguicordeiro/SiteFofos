@@ -100,6 +100,13 @@ export default function AccountPage() {
                                         <ProductBox {...wp} wished="true"
                                              key={wp._id} onRemoveHeart={producetRemovedWish} />
                                          ))}
+                                         {wishedProducts.length === 0 && (
+                                            <>
+                                                <p>
+                                                    A sua lista de desejos está vazia
+                                                </p>
+                                            </>
+                                         )}
                                   </WishedGrid>
                                 )}
                             </WhiteBox>
