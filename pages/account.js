@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "@/components/Spinner";
 import ProductBox from "@/components/ProductBox";
+import Tabs from "@/components/Tabs";
 
 const Title = styled.h1`
     font-size: 1.5em;
@@ -97,8 +98,7 @@ export default function AccountPage() {
                     <div>
                         <RevealWrapper delay={0}>
                             <WhiteBox>
-                                <h2>Lista de desejos</h2>
-                                {!wishedLoaded && (
+                                <Tabs tabs={["Lista de Desejos", "Ordens"]} active={"Lista de Desejos"}/>                                {!wishedLoaded && (
                                     <Spinner fullWidth={true} />
                                 )}
                                 {wishedLoaded && (
