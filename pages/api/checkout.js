@@ -34,7 +34,7 @@ export default async function handler(req, res) {
         }
     }
 
-    const session = getServerSession(req, res, authOptions);
+    const session = await getServerSession(req, res, authOptions);
 
     const orderDoc = await Order.create({
         line_items, name, email, city, address, cep, house, complement, paid:false,
