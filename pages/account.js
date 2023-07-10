@@ -49,7 +49,9 @@ export default function AccountPage() {
   const [complement, setComplement] = useState("");
   const [loaded, setLoaded] = useState(true);
   const [wishedLoaded, setWishedLoaded] = useState(true);
+  const [orderLoaded, setOrderLoaded] = useState(true);
   const [wishedProducts, setWishedProducts] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [activeTab, setActiveTab] = useState("Lista de Desejos");
 
   async function logout() {
@@ -85,6 +87,7 @@ export default function AccountPage() {
     axios.get("/api/thread").then((response) => {
       setLoaded(false);
       setWishedLoaded(false);
+      setOrderLoaded(false);
       setName(response.data.name);
       setEmail(response.data.email);
       setCity(response.data.city);
@@ -99,6 +102,10 @@ export default function AccountPage() {
       setWishedProducts(response.data.map((wp) => wp.product));
       setWishedLoaded(true);
     });
+    axios.get("/api/orders").then(response => {
+        setOrders(response.data);
+        setOrderLoaded(true);
+    })
   }, [session]);
 
   function producetRemovedWish(idToRemove) {
@@ -120,34 +127,48 @@ export default function AccountPage() {
                   onChange={setActiveTab}
                   active={activeTab}
                 />
-                <>
-                  {!wishedLoaded && <Spinner fullWidth={true} />}
-                  {wishedLoaded && (
-                    <WishedGrid>
-                      {wishedProducts.length > 0 &&
-                        wishedProducts.map((wp) => (
-                          <ProductBox
-                            {...wp}
-                            wished="true"
-                            key={wp._id}
-                            onRemoveHeart={producetRemovedWish}
-                          />
-                        ))}
-                      {wishedProducts.length === 0 && (
-                        <>
-                          {session && (
-                            <p>A sua lista de desejos está vazia</p>
-                          )}
-                          {!session && (
-                            <p>
-                              Faça login para adicionar produtos a sua lista
-                            </p>
-                          )}
-                        </>
-                      )}
-                    </WishedGrid>
-                  )}
-                </>
+                {activeTab === "Lista de Desejos" && (
+                    <>
+                    {!wishedLoaded && <Spinner fullWidth={true} />}
+                    {wishedLoaded && (
+                      <WishedGrid>
+                        {wishedProducts.length > 0 &&
+                          wishedProducts.map((wp) => (
+                            <ProductBox
+                              {...wp}
+                              wished="true"
+                              key={wp._id}
+                              onRemoveHeart={producetRemovedWish}
+                            />
+                          ))}
+                        {wishedProducts.length === 0 && (
+                          <>
+                            {session && (
+                              <p>A sua lista de desejos está vazia</p>
+                            )}
+                            {!session && (
+                              <p>
+                                Faça login para adicionar produtos a sua lista
+                              </p>
+                            )}
+                          </>
+                        )}
+                      </WishedGrid>
+                    )}
+                  </>
+                )}
+                {activeTab === "Ordens" && (
+                    <>
+                        {!orderLoaded && (
+                            <Spinner fullWidth={true} />
+                        )}
+                        {orderLoaded && (
+                            <div>
+                                {orders.length}
+                            </div>
+                        )}
+                    </>
+                )}
               </WhiteBox>
             </RevealWrapper>
           </div>
