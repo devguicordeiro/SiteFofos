@@ -2,11 +2,11 @@ import { styled } from "styled-components"
 
 const StyledOrder = styled.div`
     background-color: fuchsia;
-    margin: 10px 0;
     padding: 10px;
     border-bottom: 1px solid #ddd;
     display: flex;
     align-items: center;
+    border-radius: 5px;
     gap: 30px;
     time{
         font-size: 0.9rem;

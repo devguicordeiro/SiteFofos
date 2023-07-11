@@ -149,7 +149,7 @@ export default function AccountPage() {
                             )}
                             {!session && (
                               <p>
-                                Faça login para adicionar produtos a sua lista
+                                Faça login para adicionar produtos que você deseja comprar no futuro
                               </p>
                             )}
                           </>
@@ -165,9 +165,14 @@ export default function AccountPage() {
                         )}
                         {orderLoaded && (
                             <div>
+                              <WishedGrid>
+                                {orders.length === 0  && (
+                                  <p>Faça login para visualizar suas ordens</p>
+                                )}
                                 {orders.length > 0 && orders.map(o => (
                                     <SingleOrder {...o}></SingleOrder>
                                 ))}
+                                </WishedGrid>
                             </div>
                         )}
                     </>
