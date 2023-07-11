@@ -11,6 +11,7 @@ import axios from "axios";
 import Spinner from "@/components/Spinner";
 import ProductBox from "@/components/ProductBox";
 import Tabs from "@/components/Tabs";
+import SingleOrder from "@/components/SingleOrder";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -164,7 +165,9 @@ export default function AccountPage() {
                         )}
                         {orderLoaded && (
                             <div>
-                                {orders.length}
+                                {orders.length > 0 && orders.map(o => (
+                                    <SingleOrder {...o}></SingleOrder>
+                                ))}
                             </div>
                         )}
                     </>
