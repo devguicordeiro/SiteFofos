@@ -23,11 +23,27 @@ const ProductRow = styled.div`
     }
 `;
 
-export default function SingleOrder({line_items, createdAt}) {
+const OrderData = styled.div`
+    padding: 10px;
+    margin-top: 2px;
+    line-height: 1.3rem;
+    font-size: 0.9rem;
+    color: purple;
+`;
+
+export default function SingleOrder({line_items, createdAt, ...rest}) {
     return(
         <StyledOrder>
             <div>
                 <time>{(new Date(createdAt)).toLocaleString("pt-BR")}</time>
+                <OrderData>
+                    {rest.name}<br />
+                    {rest.email}<br />
+                    {rest.cep}, {rest.city} <br />
+                    {rest.address} <br />
+                    {rest.house}, {rest.complement}
+
+                </OrderData>
             </div>
             <div>
                 {line_items.map(item => (
