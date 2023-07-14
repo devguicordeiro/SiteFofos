@@ -57,6 +57,12 @@ const ButtonsWrapper = styled.div`
     margin-top: 25px;
 `;
 
+const StyledColumn = styled(Column)`
+display: flex;
+align-items: center;
+justify-content: center;
+`;
+
 export default function Featured({product}) {
     return(
         <Bg>
@@ -78,11 +84,13 @@ export default function Featured({product}) {
                         </RevealWrapper>
                     </div>
                    </Column>
-                    <Column>
+                    <StyledColumn>
                         <RevealWrapper delay={0}>
-                           <img className={"main"} src={product?.images?.[0]} alt="alt"/>
+                            <div>
+                                <img className={"main"} src={product?.images?.[0]} alt="alt"/>
+                            </div>
                         </RevealWrapper>
-                    </Column>
+                    </StyledColumn>
                 </ColumnsWrapper>
             </Center>
         </Bg>
