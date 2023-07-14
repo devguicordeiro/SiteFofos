@@ -63,13 +63,22 @@ align-items: center;
 justify-content: center;
 `;
 
+const ContentWrapper = styled.div`
+    @media screen and (max-width: 768px) {
+        display: flex;
+        div {
+            justify-content: center;
+        }
+}
+`;
+
 export default function Featured({product}) {
     return(
         <Bg>
             <Center>
                 <ColumnsWrapper>
                     <Column>
-                    <div>
+                    <ContentWrapper>
                         <RevealWrapper delay={0} origin={"left"}>
                             <Title>{product?.title}</Title>
                             <Desc>{product?.description}</Desc>
@@ -82,7 +91,7 @@ export default function Featured({product}) {
                                 </FlyingButtonComponent>
                             </ButtonsWrapper>
                         </RevealWrapper>
-                    </div>
+                    </ContentWrapper    >
                    </Column>
                     <StyledColumn>
                         <RevealWrapper delay={0}>
