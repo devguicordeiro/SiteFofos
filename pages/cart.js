@@ -93,7 +93,7 @@ export default function CartPage() {
     if (window?.location.href.includes("success")) {
       setIsSuccess(true);
       clearCart();
-    }    
+    }
   }, [clearCart]);
 
   useEffect(() => {
@@ -135,10 +135,10 @@ export default function CartPage() {
     }
   }
 
-  let total = 0;
+  let productsTotal = 0;
   for (const productId of cartProducts) {
     const price = products.find(p => p._id === productId)?.price || 0;
-    total += price;
+    productsTotal += price;
   }
 
   if (isSuccess) {
@@ -193,9 +193,14 @@ export default function CartPage() {
                     </tr>
                   ))}
                   <tr>
-                    <td>TOTAL:</td>
+                    <td>Produtos</td>
                     <td></td>
-                    <td>R${total}</td>
+                    <td>R${productsTotal}</td>
+                  </tr>
+                  <tr>
+                    <td>Delivery</td>
+                    <td></td>
+                    <td>R$666</td>
                   </tr>
                 </tbody>
               </Table>
