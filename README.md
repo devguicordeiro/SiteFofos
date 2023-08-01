@@ -10,7 +10,10 @@ What can you find here:
 - The full website code of Fofos Pet Shop
 
 
-## Installation
+## First big project, using next.js, React and MongoDB
+
+Notes:
+- After almost 2 weeks suffering from acute gastrits, tmrw i'll be finally back to coding and finish this project.
 
 
 ## Please help me out by starring this repository
